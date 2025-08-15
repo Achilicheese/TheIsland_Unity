@@ -5,6 +5,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float _normalSpeed = 5f;
     [SerializeField] private float _runningSpeed = 8f;
     [SerializeField] private float _jumpHeight = 2f;
+    [SerializeField] private Stamina _stamina;
 
     private bool _isGrounded;
     private bool _isMoving;
@@ -16,6 +17,7 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         _player = GetComponent<CharacterController>();
+        _stamina = GetComponent<Stamina>();
     }
 
     void Update()
@@ -39,7 +41,7 @@ public class PlayerMove : MonoBehaviour
         Vector3 RightLeft = transform.right * move_Right_Left;
         Vector3 ForwardBack = transform.forward * move_Forwards_Backwards;
 
-        Vector3 move = RightLeft + ForwardBack;
+        Vector3 move = (RightLeft + ForwardBack);
 
         if (Input.GetKey(KeyCode.Q))
         {
@@ -50,7 +52,7 @@ public class PlayerMove : MonoBehaviour
             currentSpeed = _normalSpeed;
         }
 
-        _isMoving = move.magnitude > 0.1f;
+        _isMoving = (move.magnitude > 0.1f);
         _player.Move(move * currentSpeed * Time.deltaTime);
     }
 
