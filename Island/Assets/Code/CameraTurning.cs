@@ -2,11 +2,9 @@ using UnityEngine;
 
 public class CameraTurning : MonoBehaviour
 {
-    [SerializeField] float mouseSensitivity = 100f;
-    [SerializeField] float xSpeed = 2f;
-    [SerializeField] float ySpeed = 2f;
-    [SerializeField] float yMinLimit = -90f;
-    [SerializeField] float yMaxLimit = 90f;
+    [SerializeField] private float mouseSensitivity = 100f;
+    [SerializeField] private float xSpeed = 2f;
+    [SerializeField] private float ySpeed = 2f;
     public Transform _playerBody;
 
     private float _rotUpDown;
@@ -25,13 +23,12 @@ public class CameraTurning : MonoBehaviour
 
     private void CameraRotation()
     {
-        _rotRightLeft = Input.GetAxis("Mouse X") * xSpeed * Time.deltaTime;
-        _rotUpDown = Input.GetAxis("Mouse Y") * ySpeed * Time.deltaTime;
+        float _rotRightLeft = Input.GetAxis("Mouse X") * xSpeed * Time.deltaTime;
+        float _rotUpDown = Input.GetAxis("Mouse Y") * ySpeed * Time.deltaTime;
 
         _rotateX -= _rotUpDown;
-        _rotateX = Mathf.Clamp(_rotateX, yMinLimit, yMaxLimit);
-
-        transform.localRotation = Quaternion.Euler(_rotateX, 0f, 0f);
+        _rotateX = Mathf.Clamp(_rotateX, -90f, 70f);
+        transform.localRotation = Quaternion.Euler(_rotateX, 0f, 0f);     
         _playerBody.Rotate(Vector3.up * _rotRightLeft);
     }
 }
