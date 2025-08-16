@@ -9,10 +9,8 @@ public class Stamina : MonoBehaviour
     [SerializeField] private float _staminaDrainSprint = 20f;
 
     public Image staminaBar;
-
     private float _currentStamina;
     private bool _isSprinting = false;
-
     public float CurrentStamina => _currentStamina;
     public float MaxStamina => _maxStamina;
     public bool IsSprinting => _isSprinting;
@@ -54,20 +52,17 @@ public class Stamina : MonoBehaviour
 
     public bool PlayerSprint()
     {
-        bool canSprint = _currentStamina >= _staminaDrainSprint;
-
-        if (canSprint)
+        if (_currentStamina <= 0f)
         {
-            _isSprinting = true;
-            _currentStamina -= _staminaDrainSprint * Time.deltaTime;
-            _currentStamina = Mathf.Clamp(_currentStamina, 0.0f, _maxStamina);
-
-            if (_currentStamina <= 0.0f)
-            {
-                _isSprinting = false;
-            }
+            _isSprinting = false;
+            return false;
         }
-        else
+
+        _isSprinting = true;
+        _currentStamina -= _staminaDrainSprint * Time.deltaTime;
+        _currentStamina = Mathf.Clamp(_currentStamina, 0.0f, _maxStamina);
+
+        if (_currentStamina <= 0f)
         {
             _isSprinting = false;
         }

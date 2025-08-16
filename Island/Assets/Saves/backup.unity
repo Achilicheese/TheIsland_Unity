@@ -1019,8 +1019,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c15c27e865c345d43b042c0476efe82f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _normalSpeed: 3
-  _runningSpeed: 5
+  _normalSpeed: 2
+  _runningSpeed: 4
   _jumpHeight: 1
   _stamina: {fileID: 1363344038}
 --- !u!114 &1363344038
