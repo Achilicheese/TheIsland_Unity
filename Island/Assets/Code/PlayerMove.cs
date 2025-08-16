@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField] private float _normalSpeed = 5f;
-    [SerializeField] private float _runningSpeed = 8f;
-    [SerializeField] private float _jumpHeight = 2f;
+    [SerializeField] private float _normalSpeed = 2f;
+    [SerializeField] private float _runningSpeed = 4f;
+    [SerializeField] private float _jumpHeight = 1f;
     [SerializeField] private Stamina _stamina;
 
     private bool _isGrounded;
@@ -43,13 +43,22 @@ public class PlayerMove : MonoBehaviour
 
         Vector3 move = (RightLeft + ForwardBack);
 
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Q) && _isMoving)
         {
-            currentSpeed = _runningSpeed;
+            if (_stamina.PlayerSprint())
+            {
+                currentSpeed = _runningSpeed;
+            }
+            else
+            {
+                currentSpeed = _normalSpeed;
+                _stamina.StopSprinting();
+            }
         }
         else
         {
             currentSpeed = _normalSpeed;
+            _stamina.StopSprinting();
         }
 
         _isMoving = (move.magnitude > 0.1f);
@@ -61,6 +70,7 @@ public class PlayerMove : MonoBehaviour
         if (_isGrounded && Input.GetButtonDown("Jump"))
         {
             _velocity.y = Mathf.Sqrt(_jumpHeight * -2f * _gravity);
+            _stamina.DrainStaminaJump();
         }
     }
 
