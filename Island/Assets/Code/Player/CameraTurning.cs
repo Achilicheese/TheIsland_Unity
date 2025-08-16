@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class CameraTurning : MonoBehaviour
 {
-    [SerializeField] private float mouseSensitivity = 100f;
     [SerializeField] private float xSpeed = 2f;
     [SerializeField] private float ySpeed = 2f;
     public Transform _playerBody;
