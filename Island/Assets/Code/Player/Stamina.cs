@@ -5,15 +5,22 @@ public class Stamina : MonoBehaviour
 {
     [SerializeField] private float _maxStamina = 100f;
     [SerializeField] private float _staminaRegenRate = 10f;
-    [SerializeField] private float _staminaDrainJump = 15f;
-    [SerializeField] private float _staminaDrainSprint = 20f;
+    [SerializeField] private float _staminaDrainJump = 30f;
+    [SerializeField] private float _staminaDrainSprint = 10f;
+    [SerializeField] private float _staminaDelayTimer = 1.0f;
 
     public Image staminaBar;
     private float _currentStamina;
     private bool _isSprinting = false;
+    private bool _canJump = true;
+    
+    private float _lastStaminaUseTime;
+    private bool _staminaWasUsed = false;
+
     public float CurrentStamina => _currentStamina;
     public float MaxStamina => _maxStamina;
     public bool IsSprinting => _isSprinting;
+    public bool CanJump => _canJump;
 
     void Start()
     {
@@ -35,47 +42,73 @@ public class Stamina : MonoBehaviour
         UpdateStaminaBar();
     }
 
-    public void DrainStaminaJump()
+    public bool DrainStaminaJump()
     {
-        bool canJump = _currentStamina >= _staminaDrainJump;
-        if (canJump)
+         if (_currentStamina <= _staminaDrainJump)
         {
-            _currentStamina -= _staminaDrainJump;
-            _currentStamina = Mathf.Clamp(_currentStamina, 0.0f, _maxStamina);
+            _canJump = false;
+            return false;
         }
+        
+        _currentStamina -= _staminaDrainJump;
+        _currentStamina = Mathf.Clamp(_currentStamina, 0.0f, _maxStamina);
+        _lastStaminaUseTime = Time.time;
+        _staminaWasUsed = true;
+        
+        _canJump = true;
+        return true;
     }
 
     public void StopSprinting()
     {
         _isSprinting = false;
+        if (_staminaWasUsed)
+        {
+            _lastStaminaUseTime = Time.time;
+        }
     }
 
     public bool PlayerSprint()
     {
         if (_currentStamina <= 0f)
         {
-            _isSprinting = false;
+            StopSprinting();
             return false;
         }
 
-        _isSprinting = true;
         _currentStamina -= _staminaDrainSprint * Time.deltaTime;
         _currentStamina = Mathf.Clamp(_currentStamina, 0.0f, _maxStamina);
-
-        if (_currentStamina <= 0f)
-        {
-            _isSprinting = false;
-        }
-
+        _lastStaminaUseTime = Time.time;
+        _staminaWasUsed = true;
+        
+        _isSprinting = true;
         return _isSprinting;
     }
 
     private void RegenerateStamina()
     {
-        if (_currentStamina < _maxStamina)
+        if (!_staminaWasUsed)
         {
-            _currentStamina += _staminaRegenRate * Time.deltaTime;
-            _currentStamina = Mathf.Clamp(_currentStamina, 0.0f, _maxStamina);
+            if (_currentStamina < _maxStamina)
+            {
+                _currentStamina += _staminaRegenRate * Time.deltaTime;
+                _currentStamina = Mathf.Clamp(_currentStamina, 0.0f, _maxStamina);
+            }
+            return;
+        }
+
+        if (Time.time - _lastStaminaUseTime >= _staminaDelayTimer)
+        {
+            if (_currentStamina < _maxStamina)
+            {
+                _currentStamina += _staminaRegenRate * Time.deltaTime;
+                _currentStamina = Mathf.Clamp(_currentStamina, 0.0f, _maxStamina);
+                
+                if (_currentStamina >= _maxStamina)
+                {
+                    _staminaWasUsed = false;
+                }
+            }
         }
     }
 
