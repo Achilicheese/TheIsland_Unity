@@ -1113,9 +1113,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Stamina
   _maxStamina: 100
   _staminaRegenRate: 10
-  _staminaDrainJump: 30
-  _staminaDrainSprint: 10
-  _staminaDelayTimer: 1
+  _staminaDrainJump: 15
+  _staminaDrainSprint: 20
   staminaBar: {fileID: 890970744}
 --- !u!1 &1410850423
 GameObject:

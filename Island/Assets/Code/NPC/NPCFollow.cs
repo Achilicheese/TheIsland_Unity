@@ -16,8 +16,8 @@ public class NPCFollow : MonoBehaviour
     private bool _isWalking;
     private bool _isRunning;
     private Vector3 _position;
-    private string _currentAnimation = "";
-    private string _previousAnimation = "";
+    private animation_Types _currentAnimation = animation_Types.idle;   // compare current enum
+    private animation_Types _previousAnimation = animation_Types.idle;  // with previous enum
     
     void Start()
     {
@@ -47,44 +47,40 @@ public class NPCFollow : MonoBehaviour
     {
         _previousAnimation = _currentAnimation;
         
-        Debug.Log($"isRunning: {_isRunning}, isWalking: {_isWalking}");
-        
         if (_isRunning)
         {
-            _currentAnimation = "run";
-            Debug.Log("Setting animation to RUN");
+            _currentAnimation = animation_Types.run;
         }
         else if (_isWalking)
         {
-            _currentAnimation = "walk";
-            Debug.Log("Setting animation to WALK");
+            _currentAnimation = animation_Types.walk;
         }
         else
         {
-            _currentAnimation = "idle";
-            Debug.Log("Setting animation to IDLE");
+            _currentAnimation = animation_Types.idle;
         }
 
         if (_currentAnimation != _previousAnimation)
         {
-            Debug.Log($"Animation changed from {_previousAnimation} to {_currentAnimation}");
             switch (_currentAnimation)
             {
-                case "idle":
+                case animation_Types.idle:
                     CrossFadeAnimation("Idle");
-                    Debug.Log("IDLE animation");
+                    Debug.Log("Setting animation to IDLE");
                     break;
                     
-                case "walk":
+                case animation_Types.walk:
                     CrossFadeAnimation("Walking");
-                    Debug.Log("WALKING animation");
+                    Debug.Log("Setting animation to WALK");
                     break;
                     
-                case "run":
+                case animation_Types.run:
                     CrossFadeAnimation("Jogging");
-                    Debug.Log("JOGGING animation");
+                    Debug.Log("Setting animation to RUN");
                     break;
             }
+
+            Debug.Log($"Animation changed from {_previousAnimation} to {_currentAnimation}");     
         }
     }
     

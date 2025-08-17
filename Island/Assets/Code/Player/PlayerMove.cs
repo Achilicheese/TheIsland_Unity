@@ -13,6 +13,7 @@ public class PlayerMove : MonoBehaviour
     private CharacterController _player;
     private Vector3 _velocity;
     private float currentSpeed;
+    private bool _wasSprinting = false;
 
     void Start()
     {
@@ -48,17 +49,28 @@ public class PlayerMove : MonoBehaviour
             if (_stamina.PlayerSprint())
             {
                 currentSpeed = _runningSpeed;
+                _wasSprinting = true;
             }
             else
             {
                 currentSpeed = _normalSpeed;
-                _stamina.StopSprinting();
+
+                if (_wasSprinting)
+                {
+                    _stamina.StopSprinting();
+                    _wasSprinting = false;
+                }
             }
         }
         else
         {
             currentSpeed = _normalSpeed;
-            _stamina.StopSprinting();
+
+            if (_wasSprinting)
+            {
+                _stamina.StopSprinting();
+                _wasSprinting = false;
+            }
         }
 
         _isMoving = (move.magnitude > 0.1f);
@@ -69,8 +81,10 @@ public class PlayerMove : MonoBehaviour
     {
         if (_isGrounded && Input.GetButtonDown("Jump"))
         {
-            _velocity.y = Mathf.Sqrt(_jumpHeight * -2f * _gravity);
-            _stamina.DrainStaminaJump();
+            if (_stamina.DrainStaminaJump() && _stamina.CanJump)
+            {
+                _velocity.y = Mathf.Sqrt(_jumpHeight * -2f * _gravity);
+            }
         }
     }
 
