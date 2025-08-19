@@ -145,4 +145,27 @@ public class NPCFollow : MonoBehaviour
             _isRunning = false;
         }
     }
+
+    public void StartFollowing(GameObject target)
+    {
+        _target = target;
+        if (_agent != null)
+        {
+            _agent.isStopped = false;
+        }
+    }
+
+    public void StopFollowing()
+    {
+        _target = null;
+        _isWalking = false;
+        _isRunning = false;
+        if (_agent != null)
+        {
+            _agent.isStopped = true;
+            _agent.ResetPath();
+            _agent.speed = 0f;
+        }
+        CrossFadeAnimation("Idle");
+    }
 }
