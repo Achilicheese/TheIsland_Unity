@@ -712,10 +712,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1115,6 +1115,7 @@ MonoBehaviour:
   _staminaRegenRate: 10
   _staminaDrainJump: 15
   _staminaDrainSprint: 20
+  _staminaDelayTimer: 1
   staminaBar: {fileID: 890970744}
 --- !u!1 &1410850423
 GameObject:
@@ -14529,6 +14530,7 @@ GameObject:
   - component: {fileID: 8572497210078797943}
   - component: {fileID: 3116832372164250123}
   - component: {fileID: 8572497210078797945}
+  - component: {fileID: 8572497210078797946}
   m_Layer: 0
   m_Name: Samantha
   m_TagString: Untagged
@@ -14601,6 +14603,20 @@ MonoBehaviour:
   _walkRange: 3
   _runRange: 5
   _target: {fileID: 1363344028}
+--- !u!114 &8572497210078797946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8572497210078797942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8f17eca3d28d244084a96a8df56247c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCStay
+  _agent: {fileID: 8572497210078797944}
+  _animate: {fileID: 8286346576636175812}
 --- !u!1 &8593883515506295434
 GameObject:
   m_ObjectHideFlags: 0
@@ -14896,6 +14912,7 @@ GameObject:
   - component: {fileID: 8830799720801869347}
   - component: {fileID: 5759848941875142156}
   - component: {fileID: 8830799720801869349}
+  - component: {fileID: 8830799720801869350}
   m_Layer: 0
   m_Name: Jaqline
   m_TagString: Untagged
@@ -14968,6 +14985,20 @@ MonoBehaviour:
   _walkRange: 3
   _runRange: 5
   _target: {fileID: 1363344028}
+--- !u!114 &8830799720801869350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8830799720801869346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8f17eca3d28d244084a96a8df56247c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCStay
+  _agent: {fileID: 8830799720801869348}
+  _animate: {fileID: 8568230952082680883}
 --- !u!4 &8835537883771048906
 Transform:
   m_ObjectHideFlags: 0

@@ -3,8 +3,8 @@ using UnityEngine.AI;
 
 public class NPCFollow : MonoBehaviour
 {
-    [SerializeField] protected NavMeshAgent _agent;
-    [SerializeField] protected Animator _animate;
+    public NavMeshAgent _agent;
+    public Animator _animate;
     [SerializeField] private double _walkSpeed;
     [SerializeField] private double _runSpeed;
     [SerializeField] private float _stopRange;
