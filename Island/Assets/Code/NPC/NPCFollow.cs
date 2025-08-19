@@ -3,8 +3,8 @@ using UnityEngine.AI;
 
 public class NPCFollow : MonoBehaviour
 {
-    [SerializeField] protected NavMeshAgent _agent;
-    [SerializeField] protected Animator _animate;
+    public NavMeshAgent _agent;
+    public Animator _animate;
     [SerializeField] private double _walkSpeed;
     [SerializeField] private double _runSpeed;
     [SerializeField] private float _stopRange;
@@ -144,5 +144,28 @@ public class NPCFollow : MonoBehaviour
             _isWalking = false;
             _isRunning = false;
         }
+    }
+
+    public void StartFollowing(GameObject target)
+    {
+        _target = target;
+        if (_agent != null)
+        {
+            _agent.isStopped = false;
+        }
+    }
+
+    public void StopFollowing()
+    {
+        _target = null;
+        _isWalking = false;
+        _isRunning = false;
+        if (_agent != null)
+        {
+            _agent.isStopped = true;
+            _agent.ResetPath();
+            _agent.speed = 0f;
+        }
+        CrossFadeAnimation("Idle");
     }
 }
