@@ -3,7 +3,7 @@ using UnityEngine;
 public class NPCCommands : MonoBehaviour
 {
     [SerializeField] private GameObject _currentNPC;
-    [SerializeField] private GameObject _player; // Assign in inspector or tag your player as "Player"
+    [SerializeField] private GameObject _player;
     [SerializeField] private NPCFollow _npcFollowing;
     [SerializeField] private NPCStay _npcStay;
 
