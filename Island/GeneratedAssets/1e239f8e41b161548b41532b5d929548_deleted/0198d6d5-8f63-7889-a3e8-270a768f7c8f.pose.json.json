@@ -1,0 +1,11 @@
+{
+    "asset": "1e239f8e41b161548b41532b5d929548",
+    "fileName": "0198d6d5-8f63-7889-a3e8-270a768f7c8f.pose.json",
+    "prompt": "Zombie walking",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 810234985,
+    "w3CTraceId": "adbf7d4f94c518c14be4aa3ce3153eb2",
+    "isTrimmed": false
+}

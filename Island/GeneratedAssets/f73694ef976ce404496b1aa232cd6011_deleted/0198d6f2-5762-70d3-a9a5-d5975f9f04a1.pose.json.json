@@ -1,0 +1,11 @@
+{
+    "asset": "f73694ef976ce404496b1aa232cd6011",
+    "fileName": "0198d6f2-5762-70d3-a9a5-d5975f9f04a1.pose.json",
+    "prompt": "Fix the arms in the animation while keeping the same animation style and motion.",
+    "negativePrompt": "",
+    "model": "a9c27ca4-3ec9-43e8-96cd-ee891aba64c5",
+    "modelName": "Text to Motion",
+    "customSeed": 1752372528,
+    "w3CTraceId": "9d7ed5c1b11959947dcbb40aa8586a5a",
+    "isTrimmed": false
+}
