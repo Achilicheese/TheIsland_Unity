@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour
+public class WASD : MonoBehaviour
 {
     [SerializeField] private float _normalSpeed = 2f;
     [SerializeField] private float _runningSpeed = 4f;
@@ -24,7 +24,7 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         CheckGrounded();
-        WASD();
+        WASD_Player();
         Jump();
         Gravity();
     }
@@ -34,9 +34,9 @@ public class PlayerMove : MonoBehaviour
         _isGrounded = _player.isGrounded;
     }
 
-    private void WASD()
+    private void WASD_Player()
     {
-        float move_Right_Left = Input.GetAxis("Horizontal");    
+        float move_Right_Left = Input.GetAxis("Horizontal");
         float move_Forwards_Backwards = Input.GetAxis("Vertical");
 
         Vector3 RightLeft = transform.right * move_Right_Left;
