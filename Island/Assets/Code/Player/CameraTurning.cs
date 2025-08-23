@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class CameraTurning : MonoBehaviour
 {
-    [SerializeField] private float xSpeed = 2f;
-    [SerializeField] private float ySpeed = 2f;
+    [SerializeField] private float xSpeed = 100f;
+    [SerializeField] private float ySpeed = 100f;
     public Transform _playerBody;
 
     private float _rotUpDown;
@@ -22,8 +22,8 @@ public class CameraTurning : MonoBehaviour
 
     private void CameraRotation()
     {
-        float _rotRightLeft = Input.GetAxis("Mouse X") * xSpeed * Time.deltaTime;
-        float _rotUpDown = Input.GetAxis("Mouse Y") * ySpeed * Time.deltaTime;
+        float _rotRightLeft = Input.GetAxis("Mouse X") * xSpeed;
+        float _rotUpDown = Input.GetAxis("Mouse Y") * ySpeed;
 
         _rotateX -= _rotUpDown;
         _rotateX = Mathf.Clamp(_rotateX, -90f, 70f);
