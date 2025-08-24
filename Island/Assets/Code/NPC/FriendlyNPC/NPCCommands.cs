@@ -1,11 +1,22 @@
+using TMPro;
 using UnityEngine;
 
 public class NPCCommands : MonoBehaviour
 {
     [SerializeField] private GameObject _currentNPC;
-    [SerializeField] private GameObject _player; // Assign in inspector or tag your player as "Player"
+    [SerializeField] private GameObject _player;
     [SerializeField] private NPCFollow _npcFollowing;
     [SerializeField] private NPCStay _npcStay;
+    [SerializeField] private TextMeshProUGUI commandText;
+    public NPCCommands commandUI;
+
+    private string currentCommand;
+
+    private void Awake()
+    {
+        if (commandUI != null)
+            commandUI.SetCommand(currentCommand);
+    }
 
     void Start()
     {
@@ -31,11 +42,13 @@ public class NPCCommands : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             HandleFollow();
+            commandUI.SetCommand("Following");
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             HandleStay();
+            SetCommand("Staying");
         }
     }
 
@@ -77,5 +90,13 @@ public class NPCCommands : MonoBehaviour
 
         _npcStay.Stay();
         Debug.Log("NPCCommands: Stay command executed (2)");
+    }
+
+    public void SetCommand(string newCommand)
+    {
+        if (commandText != null)
+        {
+            commandText.text = newCommand;
+        }
     }
 }
